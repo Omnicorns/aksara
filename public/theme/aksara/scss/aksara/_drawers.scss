@@ -1,0 +1,129 @@
+// Left course index drawer and right block drawer.
+
+.drawer {
+    background-color: $aksara-paper;
+    box-shadow: none;
+}
+
+.drawer.drawer-left {
+    border-right: 1px solid $aksara-line;
+}
+
+.drawer.drawer-right {
+    border-left: 1px solid $aksara-line;
+    background-color: $gray-100;
+}
+
+.drawerheader {
+    background-color: inherit;
+}
+
+.drawer.scrolled .drawerheader {
+    box-shadow: 0 1px 0 $aksara-line;
+}
+
+// Floating toggles for the drawers.
+.drawer-toggles .drawer-toggler {
+    .btn {
+        background-color: $aksara-surface;
+        border: 1px solid $aksara-line;
+        border-radius: $aksara-radius;
+        box-shadow: $box-shadow-sm;
+        color: $aksara-ink;
+
+        &:hover {
+            background-color: $gray-200;
+        }
+    }
+}
+
+// Course index.
+.courseindex {
+    .courseindex-section {
+        border-left: 0;
+        margin-bottom: .25rem;
+
+        .courseindex-section-title {
+            padding: .375rem .25rem;
+            border-radius: $aksara-radius;
+
+            .courseindex-link {
+                font-weight: 600;
+                color: $aksara-ink;
+            }
+        }
+
+        &.current {
+            border-left: 0;
+
+            .courseindex-section-title {
+                .courseindex-link::after {
+                    content: "";
+                    display: inline-block;
+                    width: 6px;
+                    height: 6px;
+                    margin-left: .5rem;
+                    border-radius: 50%;
+                    background-color: $aksara-accent;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+
+    .courseindex-item {
+        padding: .3rem .5rem;
+        border-radius: $aksara-radius;
+
+        .courseindex-link,
+        .courseindex-chevron {
+            color: $gray-700;
+        }
+
+        &:hover {
+            background-color: $gray-200;
+        }
+
+        &.pageitem {
+            background-color: rgba($primary, .1);
+            color: $primary;
+            scroll-margin: 6rem;
+
+            .courseindex-link,
+            .courseindex-chevron {
+                color: $primary;
+                font-weight: 600;
+            }
+
+            &:hover {
+                background-color: rgba($primary, .14);
+            }
+        }
+
+        &.dimmed .courseindex-link {
+            color: $gray-500;
+        }
+    }
+
+    .completioninfo {
+        .icon {
+            color: $success;
+        }
+    }
+}
+
+// Blocks inside the right drawer.
+.drawer-right .block,
+#block-region-side-pre .block {
+    background-color: $aksara-surface;
+    border: 1px solid $aksara-line;
+    border-radius: $aksara-radius-lg;
+    box-shadow: none;
+    margin-bottom: 1rem;
+
+    .card-title {
+        font-family: $font-family-sans-serif;
+        font-size: .9375rem;
+        font-weight: 600;
+    }
+}

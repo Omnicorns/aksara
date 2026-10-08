@@ -1,0 +1,94 @@
+// Aksara design tokens.
+// This file is prepended before Bootstrap, so everything here wins over Bootstrap's !default values.
+// Only Sass built-in functions can be used here (Bootstrap functions are not loaded yet).
+
+// Palette: warm paper, dark ink, one deep green and a turmeric accent.
+$aksara-ink:          #1f2328 !default;
+$aksara-paper:        #f6f4ef !default;
+$aksara-surface:      #ffffff !default;
+$aksara-line:         #e4dfd5 !default;
+$aksara-line-strong:  #cec7b9 !default;
+$aksara-muted:        #646a72 !default;
+$aksara-accent:       #b8741a !default;
+$primary:             #17594f !default;
+
+$aksara-radius:       6px !default;
+$aksara-radius-lg:    10px !default;
+$aksara-content-max:  1180px !default;
+
+// Warm grey scale used by Bootstrap and Moodle core.
+$white:    #fff !default;
+$gray-100: #f8f7f3 !default;
+$gray-200: #efece6 !default;
+$gray-300: $aksara-line !default;
+$gray-400: $aksara-line-strong !default;
+$gray-500: #9b968c !default;
+$gray-600: #6e6a62 !default;
+$gray-700: #4b4944 !default;
+$gray-800: #34322e !default;
+$gray-900: $aksara-ink !default;
+
+$success: #2e7148 !default;
+$info:    #2b6a86 !default;
+$warning: #b97c0c !default;
+$danger:  #b0372b !default;
+
+// Typography.
+$font-family-sans-serif: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$aksara-font-serif: "Source Serif 4", "Iowan Old Style", Georgia, "Times New Roman", serif !default;
+$headings-font-family: $aksara-font-serif !default;
+$headings-font-weight: 600 !default;
+$headings-line-height: 1.25 !default;
+$headings-color: $aksara-ink !default;
+$font-size-base: 0.9375rem !default;
+$line-height-base: 1.55 !default;
+$font-weight-bold: 600 !default;
+
+$body-bg: $aksara-paper !default;
+$body-color: $aksara-ink !default;
+$text-muted: $aksara-muted !default;
+
+// Shape: small radii, borders instead of heavy shadows.
+$border-color: $aksara-line !default;
+$border-radius: $aksara-radius !default;
+$border-radius-sm: 4px !default;
+$border-radius-lg: $aksara-radius-lg !default;
+$box-shadow-sm: 0 1px 2px rgba(31, 35, 40, .05) !default;
+$box-shadow: 0 1px 3px rgba(31, 35, 40, .06), 0 4px 12px rgba(31, 35, 40, .05) !default;
+$box-shadow-lg: 0 12px 32px rgba(31, 35, 40, .12) !default;
+
+// Links.
+$link-decoration: none !default;
+$link-hover-decoration: underline !default;
+
+// Components.
+$btn-font-weight: 500 !default;
+$btn-padding-x: 1rem !default;
+$btn-box-shadow: none !default;
+$input-border-color: $aksara-line-strong !default;
+$input-bg: $white !default;
+$input-placeholder-color: #8c877e !default;
+$card-border-color: $aksara-line !default;
+$card-cap-bg: transparent !default;
+$card-bg: $aksara-surface !default;
+$dropdown-border-color: $aksara-line !default;
+$dropdown-link-active-bg: $primary !default;
+$modal-content-border-color: $aksara-line !default;
+$list-group-border-color: $aksara-line !default;
+$table-border-color: $aksara-line !default;
+$hr-border-color: $aksara-line !default;
+$progress-bg: #ebe7df !default;
+$progress-height: .375rem !default;
+$badge-font-weight: 500 !default;
+$navbar-height: 60px !default;
+$drawer-bg-color: $aksara-paper !default;
+
+// Activity icons: calmer colours that sit well on the paper background.
+$activity-icon-administration-bg:     #6f5a86 !default;
+$activity-icon-assessment-bg:         #a3412f !default;
+$activity-icon-collaboration-bg:      #3c5f93 !default;
+$activity-icon-communication-bg:      #a8650f !default;
+$activity-icon-content-bg:            #1d6b60 !default;
+$activity-icon-interactivecontent-bg: #6e4a2c !default;
+$activity-border-radius: $aksara-radius-lg !default;
+$activity-item-padding: .75rem !default;

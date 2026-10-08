@@ -1,0 +1,196 @@
+// Dashboard, My courses, course listings and the front page.
+
+// Moodle's generated placeholder patterns are very saturated; tone them down.
+.course-card .card-img-top[style*="data:image/svg"],
+.course-listitem .list-image[style*="data:image/svg"],
+.courseimage[style*="data:image/svg"] {
+    filter: saturate(.45) brightness(1.04);
+}
+
+// On "My courses" the overview block is the whole page, so it needs no frame.
+.pagelayout-mycourses .block_myoverview.card,
+#page-my-courses .block_myoverview.card {
+    background: transparent;
+    border: 0;
+}
+
+// Course cards (block_myoverview and recently accessed courses).
+.course-card {
+    position: relative;
+    width: 100%;
+    background-color: $aksara-surface;
+    border: 1px solid $aksara-line;
+    border-radius: $aksara-radius-lg;
+    overflow: hidden;
+    transition: border-color .15s ease, transform .15s ease;
+
+    &:hover {
+        border-color: $aksara-line-strong;
+        transform: translateY(-1px);
+    }
+
+    .card-img-top {
+        height: 8.5rem;
+        background-color: $gray-200;
+        border-radius: 0;
+        border-bottom: 1px solid $aksara-line;
+    }
+
+    .card-body {
+        padding: 1rem 1rem .5rem;
+    }
+
+    .coursename {
+        display: block;
+        font-family: $aksara-font-serif;
+        font-size: 1.0625rem;
+        font-weight: 600;
+        line-height: 1.3;
+        color: $aksara-ink;
+        white-space: normal;
+
+        &:hover {
+            color: $primary;
+            text-decoration: none;
+        }
+    }
+
+    .categoryname,
+    .text-muted {
+        font-size: .8125rem;
+    }
+
+    .card-footer {
+        padding: .5rem 1rem 1rem;
+        background-color: transparent;
+    }
+
+    .progress-text {
+        font-size: .8125rem;
+        color: $aksara-muted;
+    }
+}
+
+.card-grid > .col {
+    padding-left: .5rem !important; // stylelint-disable-line declaration-no-important
+    padding-right: .5rem !important; // stylelint-disable-line declaration-no-important
+    margin-bottom: 1rem !important; // stylelint-disable-line declaration-no-important
+
+    .course-card {
+        margin: 0 !important; // stylelint-disable-line declaration-no-important
+    }
+}
+
+.dashboard-card-deck {
+    margin-left: -.5rem;
+    margin-right: -.5rem;
+}
+
+// List and summary views.
+.course-listitem {
+    background-color: $aksara-surface;
+    border: 1px solid $aksara-line !important; // stylelint-disable-line declaration-no-important
+    border-radius: $aksara-radius-lg !important; // stylelint-disable-line declaration-no-important
+    margin-bottom: .75rem;
+    padding: 1rem !important; // stylelint-disable-line declaration-no-important
+
+    .coursename {
+        font-family: $aksara-font-serif;
+        font-size: 1.0625rem;
+        font-weight: 600;
+        color: $aksara-ink;
+    }
+
+    .list-image {
+        border-radius: $aksara-radius;
+    }
+}
+
+// Block container on the dashboard.
+.block_myoverview,
+.block_timeline,
+.block_calendar_month,
+.block_recentlyaccessedcourses,
+.block_recentlyaccesseditems,
+#region-main .block {
+    &.card {
+        border-radius: $aksara-radius-lg;
+        border-color: $aksara-line;
+    }
+
+    > .card-body > .card-title,
+    .card-title {
+        font-family: $aksara-font-serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+}
+
+// Course overview filter bar.
+.block_myoverview [data-region="filter"] {
+    .btn {
+        font-size: .875rem;
+    }
+}
+
+// Timeline items.
+.block_timeline {
+    .list-group-item {
+        border-left: 0;
+        border-right: 0;
+    }
+
+    .event-name {
+        font-weight: 600;
+    }
+}
+
+// Calendar.
+.maincalendar .calendarmonth,
+.block_calendar_month .calendarmonth {
+    td.today .day-number-circle {
+        background-color: $primary;
+    }
+}
+
+// Front page: course boxes in "available courses".
+.frontpage-course-list-all,
+.frontpage-course-list-enrolled,
+.course_category_tree,
+#frontpage-available-course-list,
+#frontpage-course-list {
+    .coursebox {
+        background-color: $aksara-surface;
+        border: 1px solid $aksara-line;
+        border-radius: $aksara-radius-lg;
+        padding: 1rem 1.25rem;
+        margin-bottom: .75rem;
+
+        .coursename a,
+        .info .coursename a {
+            font-family: $aksara-font-serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: $aksara-ink;
+        }
+
+        .summary {
+            color: $gray-700;
+        }
+    }
+}
+
+#frontpage-course-list h2,
+#frontpage-available-course-list h2,
+.frontpage-course-list-all h2,
+#site-news-forum h2 {
+    font-family: $aksara-font-serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+// Course category page.
+.course_category_tree .category > .info > .categoryname a {
+    font-weight: 600;
+    color: $aksara-ink;
+}

@@ -1,0 +1,135 @@
+// Top bar and primary navigation.
+
+.navbar.fixed-top {
+    background-color: $aksara-surface !important; // stylelint-disable-line declaration-no-important
+    border-bottom: 1px solid $aksara-line;
+    box-shadow: none;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    .navbar-brand {
+        font-family: $aksara-font-serif;
+        font-weight: 700;
+        font-size: 1.1875rem;
+        color: $aksara-ink;
+        letter-spacing: -.01em;
+
+        .logo img,
+        img {
+            max-height: 34px;
+        }
+    }
+}
+
+.primary-navigation {
+    .navigation {
+        height: $navbar-height;
+    }
+
+    .navigation .nav-link {
+        position: relative;
+        height: $navbar-height;
+        padding: 0 .875rem;
+        color: $aksara-muted;
+        font-weight: 500;
+        border-bottom: 0 !important; // stylelint-disable-line declaration-no-important
+
+        &:hover,
+        &:focus {
+            color: $aksara-ink;
+            background-color: transparent;
+        }
+
+        &.active {
+            color: $aksara-ink;
+            font-weight: 600;
+
+            &::after {
+                content: "";
+                position: absolute;
+                left: .875rem;
+                right: .875rem;
+                bottom: 0;
+                height: 2px;
+                background-color: $aksara-accent;
+            }
+        }
+    }
+}
+
+// User menu, notifications, messaging icons.
+.navbar {
+    .usermenu .userinitials {
+        background-color: rgba($primary, .1);
+        color: $primary;
+        font-weight: 600;
+    }
+
+    .popover-region-toggle,
+    .nav-link {
+        color: $aksara-muted;
+    }
+
+    .popover-region-toggle:hover {
+        color: $aksara-ink;
+    }
+
+    .editmode-switch-form {
+        .form-check-label {
+            font-size: .8125rem;
+            color: $aksara-muted;
+        }
+    }
+
+    .divider {
+        border-color: $aksara-line !important; // stylelint-disable-line declaration-no-important
+    }
+}
+
+// Dropdowns from the navbar and everywhere else.
+.dropdown-menu {
+    border-color: $aksara-line;
+    border-radius: $aksara-radius;
+    box-shadow: $box-shadow-lg;
+    padding: .375rem;
+
+    .dropdown-item {
+        border-radius: 4px;
+        padding: .45rem .75rem;
+        font-size: .875rem;
+
+        &:hover,
+        &:focus {
+            background-color: $gray-200;
+            color: $aksara-ink;
+        }
+
+        &.active,
+        &:active,
+        &[aria-current="true"] {
+            background-color: rgba($primary, .1);
+            color: $primary;
+            font-weight: 500;
+        }
+    }
+
+    .dropdown-divider {
+        border-color: $aksara-line;
+        margin: .375rem 0;
+    }
+}
+
+// Mobile primary drawer.
+.drawer-primary {
+    .drawercontent .list-group-item {
+        border: 0;
+        border-radius: $aksara-radius;
+        margin: 1px 0;
+
+        &.active {
+            background-color: rgba($primary, .1);
+            color: $primary;
+            font-weight: 600;
+        }
+    }
+}

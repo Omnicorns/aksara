@@ -1,0 +1,129 @@
+// Page header, breadcrumbs and secondary navigation tabs.
+
+#page-header {
+    margin-bottom: 1.5rem;
+
+    .page-context-header {
+        align-items: center;
+    }
+
+    .page-header-headings h1,
+    .page-header-headings .h2,
+    h1.h2 {
+        font-family: $aksara-font-serif;
+        font-size: 1.875rem;
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: -.015em;
+        margin-bottom: 0;
+    }
+
+    .page-header-image .icon,
+    .page-header-image img {
+        border-radius: $aksara-radius;
+    }
+}
+
+.breadcrumb {
+    background: transparent;
+    padding: 0;
+    margin-bottom: .5rem;
+    font-size: .8125rem;
+
+    .breadcrumb-item {
+        color: $aksara-muted;
+
+        a {
+            color: $aksara-muted;
+
+            &:hover {
+                color: $primary;
+            }
+        }
+
+        + .breadcrumb-item::before {
+            content: "/";
+            color: $gray-400;
+        }
+    }
+}
+
+// Course and activity sub-navigation (Course, Settings, Participants...).
+.secondary-navigation {
+    padding-bottom: 0;
+    margin-bottom: 1.5rem;
+
+    .navigation {
+        border-bottom: 1px solid $aksara-line;
+        padding: 0;
+        background: transparent;
+    }
+
+    .navigation .nav-tabs {
+        border: 0;
+        gap: .25rem;
+
+        .nav-link {
+            position: relative;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            color: $aksara-muted;
+            font-weight: 500;
+            padding: .75rem .875rem;
+            height: auto;
+
+            &:hover {
+                color: $aksara-ink;
+                border: 0;
+                background: transparent;
+            }
+
+            &.active,
+            &.active:hover {
+                color: $aksara-ink;
+                font-weight: 600;
+                background: transparent;
+                border: 0;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    left: .875rem;
+                    right: .875rem;
+                    bottom: -1px;
+                    height: 2px;
+                    background-color: $primary;
+                }
+            }
+        }
+    }
+}
+
+// Activity header (dates, completion, description).
+.activity-header {
+    &:not(:empty) {
+        background-color: $aksara-surface;
+        border: 1px solid $aksara-line;
+        border-radius: $aksara-radius-lg;
+        padding: 1rem 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .activity-information {
+        .badge {
+            font-weight: 500;
+        }
+    }
+}
+
+// Tertiary navigation (selects and action bars under the tabs).
+.tertiary-navigation {
+    padding-bottom: 1rem;
+
+    .navitem .btn,
+    .urlselect .custom-select,
+    .urlselect .form-select {
+        border-radius: $aksara-radius;
+    }
+}

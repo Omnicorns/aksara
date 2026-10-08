@@ -1,0 +1,102 @@
+// Base: page background, type scale, links, selection.
+
+:root {
+    --aksara-ink: #{$aksara-ink};
+    --aksara-paper: #{$aksara-paper};
+    --aksara-surface: #{$aksara-surface};
+    --aksara-line: #{$aksara-line};
+    --aksara-muted: #{$aksara-muted};
+    --aksara-accent: #{$aksara-accent};
+    --aksara-primary: #{$primary};
+}
+
+body {
+    background-color: $aksara-paper;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1;
+}
+
+::selection {
+    background-color: rgba($primary, .18);
+}
+
+h1, .h1 {
+    font-size: 1.875rem;
+    letter-spacing: -.01em;
+}
+
+h2, .h2 {
+    font-size: 1.5rem;
+    letter-spacing: -.005em;
+}
+
+h3, .h3 {
+    font-size: 1.25rem;
+}
+
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+    font-family: $font-family-sans-serif;
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+h4, .h4 {
+    font-size: 1.0625rem;
+}
+
+h5, .h5 {
+    font-size: 1rem;
+}
+
+a {
+    text-underline-offset: .18em;
+    text-decoration-thickness: 1px;
+}
+
+.text-muted,
+.muted {
+    color: $aksara-muted !important; // stylelint-disable-line declaration-no-important
+}
+
+small,
+.small {
+    font-size: .8125rem;
+}
+
+// Keyboard focus: one clear ring everywhere, nothing on mouse click.
+:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+}
+
+.aabtn:focus,
+.btn:focus,
+.form-control:focus,
+.form-select:focus {
+    box-shadow: 0 0 0 3px rgba($primary, .2);
+}
+
+hr {
+    opacity: 1;
+    border-color: $aksara-line;
+}
+
+// Content column a little wider and calmer than Boost.
+#page.drawers .main-inner {
+    background-color: transparent;
+    padding-top: 1.75rem;
+    padding-bottom: 2.5rem;
+}
+
+#region-main {
+    background-color: transparent;
+    border: 0;
+}
+
+#region-main-box {
+    margin-bottom: 0;
+}

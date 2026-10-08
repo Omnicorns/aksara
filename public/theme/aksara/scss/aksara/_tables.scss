@@ -1,0 +1,59 @@
+// Tables: gradebook, participants, report builder, admin.
+
+.generaltable,
+.table {
+    --#{$prefix}table-bg: #{$aksara-surface};
+    --#{$prefix}table-striped-bg: #{$gray-100};
+    --#{$prefix}table-hover-bg: #{$gray-100};
+    border-color: $aksara-line;
+    font-size: .875rem;
+
+    thead th,
+    th.header {
+        background-color: $gray-100;
+        color: $gray-700;
+        font-weight: 600;
+        font-size: .8125rem;
+        text-transform: none;
+        border-bottom: 1px solid $aksara-line-strong;
+        vertical-align: middle;
+    }
+
+    td,
+    th {
+        border-color: $aksara-line;
+        padding: .65rem .75rem;
+        vertical-align: middle;
+    }
+
+    tbody tr:hover > * {
+        background-color: $gray-100;
+    }
+}
+
+// Wrap wide tables in a quiet frame.
+#region-main .generaltable:not(.boxaligncenter),
+.reportbuilder-table {
+    border: 1px solid $aksara-line;
+    border-radius: $aksara-radius;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+}
+
+// Initials bar on participant lists.
+.initialbar .page-item .page-link {
+    border-radius: 4px !important; // stylelint-disable-line declaration-no-important
+}
+
+// Grader report keeps its own sticky columns; only soften the colours.
+.path-grade-report-grader .gradeparent {
+    .heading,
+    .header {
+        background-color: $gray-100;
+    }
+
+    tr .cell {
+        border-color: $aksara-line;
+    }
+}

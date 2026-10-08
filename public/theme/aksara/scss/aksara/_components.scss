@@ -1,0 +1,210 @@
+// Buttons, cards, badges, alerts, modals, progress.
+
+.btn {
+    border-radius: $aksara-radius;
+    letter-spacing: .005em;
+}
+
+.btn-primary {
+    &:hover {
+        background-color: darken($primary, 6%);
+        border-color: darken($primary, 6%);
+    }
+}
+
+.btn-secondary {
+    background-color: $aksara-surface;
+    border-color: $aksara-line-strong;
+    color: $aksara-ink;
+
+    &:hover,
+    &:focus {
+        background-color: $gray-200;
+        border-color: $aksara-line-strong;
+        color: $aksara-ink;
+    }
+
+    &:active,
+    &.active {
+        background-color: $gray-300 !important; // stylelint-disable-line declaration-no-important
+        border-color: $aksara-line-strong !important; // stylelint-disable-line declaration-no-important
+        color: $aksara-ink !important; // stylelint-disable-line declaration-no-important
+    }
+}
+
+.btn-outline-secondary {
+    border-color: $aksara-line-strong;
+    color: $aksara-ink;
+
+    &:hover {
+        background-color: $gray-200;
+        border-color: $aksara-line-strong;
+        color: $aksara-ink;
+    }
+}
+
+.btn-link {
+    font-weight: 500;
+}
+
+.btn-icon {
+    border-radius: $aksara-radius;
+
+    &:hover {
+        background-color: $gray-200;
+    }
+}
+
+// Cards.
+.card {
+    border-color: $aksara-line;
+    border-radius: $aksara-radius-lg;
+    box-shadow: none;
+
+    .card-header,
+    .card-footer {
+        border-color: $aksara-line;
+        background-color: transparent;
+    }
+}
+
+.card-title {
+    font-weight: 600;
+}
+
+// Badges: flat, readable.
+.badge {
+    border-radius: 4px;
+    padding: .3em .55em;
+    font-weight: 500;
+    letter-spacing: .01em;
+}
+
+.badge.bg-info,
+.badge.bg-secondary,
+.badge.bg-light {
+    background-color: $gray-200 !important; // stylelint-disable-line declaration-no-important
+    color: $gray-800 !important; // stylelint-disable-line declaration-no-important
+    border: 1px solid $aksara-line;
+}
+
+.badge.bg-success {
+    background-color: rgba($success, .12) !important; // stylelint-disable-line declaration-no-important
+    color: darken($success, 8%) !important; // stylelint-disable-line declaration-no-important
+}
+
+.badge.bg-warning {
+    background-color: rgba($warning, .15) !important; // stylelint-disable-line declaration-no-important
+    color: darken($warning, 14%) !important; // stylelint-disable-line declaration-no-important
+}
+
+.badge.bg-danger {
+    background-color: rgba($danger, .12) !important; // stylelint-disable-line declaration-no-important
+    color: $danger !important; // stylelint-disable-line declaration-no-important
+}
+
+// Alerts: left rule instead of a filled box.
+.alert {
+    border-radius: $aksara-radius;
+    border: 1px solid $aksara-line;
+    border-left-width: 3px;
+    background-color: $aksara-surface;
+    color: $aksara-ink;
+
+    &.alert-info {
+        border-left-color: $info;
+    }
+
+    &.alert-success {
+        border-left-color: $success;
+    }
+
+    &.alert-warning {
+        border-left-color: $warning;
+    }
+
+    &.alert-danger {
+        border-left-color: $danger;
+    }
+
+    &.alert-primary {
+        border-left-color: $primary;
+    }
+}
+
+// Modals.
+.modal-content {
+    border-radius: $aksara-radius-lg;
+    box-shadow: $box-shadow-lg;
+    border-color: $aksara-line;
+}
+
+.modal-header {
+    border-bottom-color: $aksara-line;
+
+    .modal-title {
+        font-family: $aksara-font-serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+}
+
+.modal-footer {
+    border-top-color: $aksara-line;
+}
+
+// Progress.
+.progress {
+    border-radius: 99px;
+    background-color: $progress-bg;
+
+    .progress-bar {
+        background-color: $primary;
+        border-radius: 99px;
+    }
+}
+
+// Pagination.
+.pagination {
+    .page-link {
+        border-color: $aksara-line;
+        color: $aksara-ink;
+        margin: 0 2px;
+        border-radius: $aksara-radius !important; // stylelint-disable-line declaration-no-important
+
+        &:hover {
+            background-color: $gray-200;
+        }
+    }
+
+    .page-item.active .page-link {
+        background-color: $primary;
+        border-color: $primary;
+        color: $white;
+    }
+}
+
+// Lists.
+.list-group-item {
+    border-color: $aksara-line;
+}
+
+// Toasts.
+.toast {
+    border-radius: $aksara-radius;
+    border-color: $aksara-line;
+    box-shadow: $box-shadow-lg;
+}
+
+// Popovers and tooltips.
+.popover {
+    border-color: $aksara-line;
+    border-radius: $aksara-radius;
+    box-shadow: $box-shadow-lg;
+}
+
+.tooltip-inner {
+    background-color: $aksara-ink;
+    border-radius: 4px;
+    font-size: .8125rem;
+}

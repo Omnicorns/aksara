@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<libraries>
+  <library>
+    <location>fonts</location>
+    <name>IBM Plex Sans and Source Serif 4 (via Fontsource)</name>
+    <description>Web fonts bundled with the theme.</description>
+    <version>5.3.0</version>
+    <license>OFL</license>
+    <licenseversion>1.1</licenseversion>
+    <repository>https://github.com/fontsource/font-files</repository>
+    <copyrights>
+      <copyright>IBM Corp.</copyright>
+      <copyright>Adobe</copyright>
+    </copyrights>
+  </library>
+</libraries>

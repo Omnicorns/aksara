@@ -1,0 +1,173 @@
+// Course page: sections and activities.
+
+.course-content {
+    .course-section {
+        margin-top: 1.25rem;
+
+        .section-item {
+            background-color: $aksara-surface;
+            border: 1px solid $aksara-line;
+            border-radius: $aksara-radius-lg;
+            padding: 1.25rem 1.25rem .75rem;
+        }
+
+        // Current week/topic: thin accent line on the left edge.
+        &.current > .section-item {
+            &::before {
+                left: -1px;
+                top: 1rem;
+                bottom: 1rem;
+                border-left: 3px solid $aksara-accent;
+                border-radius: 0 2px 2px 0;
+            }
+        }
+
+        &.hidden .section-item,
+        &.orphaned .section-item {
+            background-color: $gray-100;
+            border-style: dashed;
+        }
+    }
+
+    .sectionname,
+    .sectionname a {
+        font-family: $aksara-font-serif;
+        font-weight: 600;
+        color: $aksara-ink;
+    }
+
+    .course-section-header {
+        padding-bottom: .25rem;
+
+        .icons-collapse-expand {
+            color: $aksara-muted;
+            border-radius: $aksara-radius;
+
+            &:hover {
+                background-color: $gray-200;
+            }
+        }
+    }
+
+    .summarytext,
+    .section-summary-activities {
+        color: $gray-700;
+    }
+}
+
+// Each activity row.
+.activity-item {
+    border-radius: $aksara-radius;
+    transition: background-color .12s ease;
+
+    &:not(.activityinline):hover {
+        background-color: $gray-100;
+    }
+
+    .activityname,
+    .instancename {
+        font-weight: 500;
+        color: $aksara-ink;
+    }
+
+    .activityname a:hover .instancename {
+        color: $primary;
+    }
+
+    .activity-altcontent {
+        color: $gray-700;
+    }
+
+    .activity-dates {
+        font-size: .8125rem;
+        color: $aksara-muted;
+    }
+}
+
+// Divider between activities.
+.course-content .section .activity + .activity {
+    border-top: 1px solid $gray-200;
+}
+
+// Activity icons: soft square tile with coloured glyph.
+.activityiconcontainer {
+    border-radius: $aksara-radius;
+    background-color: $gray-100;
+    border: 1px solid $aksara-line;
+
+    &.courseicon,
+    &.smaller {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@each $type, $value in $activity-icon-colors {
+    .activityiconcontainer.#{$type}:not(.isbranded) {
+        background-color: rgba($value, .07);
+        border-color: rgba($value, .18);
+    }
+}
+
+// Completion buttons and badges.
+.activity-completion,
+.activity-information {
+    .btn {
+        font-size: .8125rem;
+        border-radius: $aksara-radius;
+    }
+
+    .btn-success,
+    .badge.alert-success {
+        background-color: rgba($success, .1);
+        border-color: rgba($success, .25);
+        color: darken($success, 6%);
+    }
+
+    .btn-outline-secondary {
+        background-color: $aksara-surface;
+    }
+}
+
+// Activity page: navigation to previous/next activity.
+.activity-navigation {
+    border-top: 1px solid $aksara-line;
+    padding-top: 1.25rem;
+    margin-top: 2rem;
+
+    .btn-link {
+        color: $aksara-ink;
+        font-weight: 500;
+    }
+}
+
+// Course summary/description boxes.
+.course-description-item,
+.summary .no-overflow,
+#intro {
+    color: $gray-700;
+}
+
+#intro.box,
+.generalbox#intro {
+    background-color: $aksara-surface;
+    border: 1px solid $aksara-line;
+    border-radius: $aksara-radius-lg;
+    padding: 1rem 1.25rem;
+}
+
+// Forum discussion list and posts.
+.forumpost,
+.forum-post-container .forumpost {
+    border-color: $aksara-line;
+    border-radius: $aksara-radius-lg;
+    background-color: $aksara-surface;
+}
+
+// Assignment status table.
+.submissionstatustable,
+.feedback {
+    .generaltable {
+        background-color: $aksara-surface;
+    }
+}
