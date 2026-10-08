@@ -1,0 +1,238 @@
+// Coloured banner around the page header (classes/output/core_renderer.php + templates/banner.mustache).
+
+$aksara-banner-ink: darken($primary, 8%) !default;
+$aksara-accent-soft: lighten($aksara-accent, 28%) !default;
+
+.aksara-banner {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    margin: 0 0 1.75rem;
+    padding: 2rem 2.25rem 1.75rem;
+    border-radius: 14px;
+    background-color: $primary;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+
+    // Ruled lines, the same motif as the login page.
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background-image: repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 27px,
+            rgba(255, 255, 255, .055) 27px,
+            rgba(255, 255, 255, .055) 28px
+        );
+        pointer-events: none;
+    }
+
+    // Big quiet letter in the corner gives the banner some depth without imagery.
+    &::after {
+        content: "A";
+        position: absolute;
+        right: -.04em;
+        bottom: -.32em;
+        z-index: -1;
+        font-family: $aksara-font-serif;
+        font-weight: 700;
+        font-size: 15rem;
+        line-height: 1;
+        color: rgba(255, 255, 255, .06);
+        pointer-events: none;
+    }
+
+    // Course image: dark colour layer on top so the title stays readable.
+    &.has-image {
+        &::before {
+            z-index: -1;
+            background-image: linear-gradient(
+                100deg,
+                rgba($aksara-banner-ink, .95) 0%,
+                rgba($aksara-banner-ink, .82) 55%,
+                rgba($aksara-banner-ink, .5) 100%
+            );
+        }
+
+        &::after {
+            display: none;
+        }
+    }
+
+    // Line up with the cards and sections below, which sit 15px in from the content edge.
+    @include media-breakpoint-up(md) {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    @include media-breakpoint-down(md) {
+        padding: 1.5rem 1.25rem 1.25rem;
+        border-radius: $aksara-radius-lg;
+
+        &::after {
+            font-size: 9rem;
+        }
+    }
+}
+
+.aksara-banner__inner {
+    position: relative;
+}
+
+.aksara-banner__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    margin: 0 0 .5rem;
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: $aksara-accent-soft;
+
+    &::before {
+        content: "";
+        width: 1.5rem;
+        height: 2px;
+        background-color: $aksara-accent;
+    }
+}
+
+.aksara-banner__greeting {
+    margin: 0 0 .15rem;
+    font-size: 1.0625rem;
+    color: rgba(255, 255, 255, .86);
+}
+
+.aksara-banner__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+        display: inline-flex;
+        align-items: center;
+        gap: .4rem;
+        padding: .3rem .75rem;
+        border-radius: 99px;
+        background-color: rgba(255, 255, 255, .12);
+        border: 1px solid rgba(255, 255, 255, .16);
+        font-size: .8125rem;
+        font-weight: 500;
+        color: #fff;
+    }
+
+    .icon {
+        margin: 0;
+        width: 14px;
+        height: 14px;
+        font-size: 14px;
+        color: $aksara-accent-soft;
+    }
+}
+
+// The standard header inside the banner, recoloured for the dark background.
+.aksara-banner #page-header {
+    margin: 0;
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+    color: #fff;
+
+    .page-context-header {
+        margin-bottom: 0 !important; // stylelint-disable-line declaration-no-important
+    }
+
+    .page-header-headings h1,
+    h1.h2,
+    h1 {
+        color: #fff;
+        font-family: $aksara-font-serif;
+        font-weight: 600;
+        line-height: 1.15;
+        font-size: 2.25rem;
+        letter-spacing: -.02em;
+
+        @include media-breakpoint-down(md) {
+            font-size: 1.625rem;
+        }
+    }
+
+    .page-context-header {
+        padding-bottom: 0;
+    }
+
+    .breadcrumb .breadcrumb-item,
+    .breadcrumb .breadcrumb-item a,
+    .breadcrumb-item + .breadcrumb-item::before {
+        color: rgba(255, 255, 255, .7);
+    }
+
+    .breadcrumb .breadcrumb-item a:hover {
+        color: #fff;
+    }
+
+    // Core's one-time "Welcome back" line repeats the greeting above it.
+    .mb-2 > span.h2 {
+        display: none;
+    }
+
+    .header-actions-container,
+    .header-action {
+        .btn:not(.btn-primary) {
+            background-color: rgba(255, 255, 255, .12);
+            border-color: rgba(255, 255, 255, .3);
+            color: #fff;
+
+            .icon {
+                color: #fff;
+            }
+
+            &:hover,
+            &:focus {
+                background-color: rgba(255, 255, 255, .22);
+                border-color: rgba(255, 255, 255, .45);
+                color: #fff;
+            }
+        }
+
+        .btn-primary {
+            background-color: #fff;
+            border-color: #fff;
+            color: $primary;
+
+            &:hover {
+                background-color: $gray-100;
+                color: darken($primary, 6%);
+            }
+        }
+
+        .action-menu .icon,
+        a.dropdown-toggle {
+            color: #fff;
+        }
+    }
+
+    a:not(.btn):not(.dropdown-item) {
+        color: #fff;
+    }
+}
+
+// Course page: the secondary tabs sit right under the banner.
+.aksara-banner--course + .secondary-navigation,
+.aksara-banner + .secondary-navigation {
+    margin-top: -.5rem;
+}
+
+// Some header buttons (e.g. "Bulk actions" in edit mode) carry the .text-primary utility.
+.aksara-banner .text-primary,
+.aksara-banner .btn.text-primary .icon {
+    color: #fff !important; // stylelint-disable-line declaration-no-important
+}

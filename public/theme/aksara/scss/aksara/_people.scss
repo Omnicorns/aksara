@@ -1,0 +1,156 @@
+// People: avatars, role editing, autocomplete pickers, notification badge.
+
+// Initials avatars get a warm, varied palette instead of flat grey.
+$aksara-avatar-colors: (
+    #d9ebe6 #17594f,
+    #f6e6cc #8a560f,
+    #e4e3f1 #4a4778,
+    #f4dcd6 #8f3a2a,
+    #dde8f2 #2c5a80,
+    #e8e4d8 #5b5446
+) !default;
+
+.userinitials {
+    font-weight: 600;
+    letter-spacing: .02em;
+    background-color: nth(nth($aksara-avatar-colors, 1), 1);
+    color: nth(nth($aksara-avatar-colors, 1), 2);
+    border: 0;
+}
+
+@for $i from 1 through length($aksara-avatar-colors) {
+    $pair: nth($aksara-avatar-colors, $i);
+    .generaltable tbody tr:nth-child(#{length($aksara-avatar-colors)}n + #{$i}) .userinitials,
+    .table tbody tr:nth-child(#{length($aksara-avatar-colors)}n + #{$i}) .userinitials {
+        background-color: nth($pair, 1);
+        color: nth($pair, 2);
+    }
+}
+
+// Names in people lists.
+#participants,
+.userenrolment,
+.generaltable {
+    td a[href*="/user/view.php"],
+    td a[href*="/user/profile.php"] {
+        font-weight: 600;
+        color: $aksara-ink;
+
+        &:hover {
+            color: $primary;
+        }
+    }
+}
+
+// Inline-editable fields (role column, names, etc.).
+.inplaceeditable {
+    .quickeditlink {
+        border-radius: 4px;
+        padding: .1rem .25rem;
+        margin: -.1rem -.25rem;
+
+        &:hover {
+            background-color: $gray-200;
+            text-decoration: none;
+        }
+
+        .icon {
+            color: $gray-500;
+            font-size: 12px;
+            width: 12px;
+            height: 12px;
+        }
+
+        &:hover .icon {
+            color: $primary;
+        }
+    }
+
+    &.inplaceeditingon {
+        .form-autocomplete-selection {
+            margin-bottom: .35rem;
+        }
+    }
+}
+
+// Autocomplete pickers (roles, users, tags, categories).
+.form-autocomplete-selection {
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: .25rem;
+        padding: .35rem .6rem;
+        margin: 0 .25rem .25rem 0;
+        border-radius: 99px;
+        background-color: rgba($primary, .1) !important; // stylelint-disable-line declaration-no-important
+        color: $primary !important; // stylelint-disable-line declaration-no-important
+        border: 1px solid rgba($primary, .2);
+        font-size: .8125rem;
+        font-weight: 600;
+    }
+}
+
+.form-autocomplete-suggestions {
+    border-color: $aksara-line;
+    border-radius: $aksara-radius;
+    box-shadow: $box-shadow-lg;
+    padding: .375rem;
+    background-color: $white;
+
+    li {
+        border-radius: 4px;
+        padding: .5rem .75rem;
+        font-size: .875rem;
+
+        &:hover,
+        &:focus {
+            background-color: $gray-200;
+            color: $aksara-ink;
+        }
+
+        &[aria-selected="true"] {
+            background-color: rgba($primary, .1);
+            color: $primary;
+            font-weight: 600;
+            box-shadow: none;
+        }
+    }
+}
+
+.form-autocomplete-downarrow {
+    color: $aksara-muted;
+}
+
+// Role names shown on the participants page and profiles.
+.roles,
+[data-region="roles"] {
+    font-weight: 500;
+}
+
+// Notification counter on the bell and messages icon.
+.popover-region .count-container {
+    background-color: $aksara-accent;
+    color: #fff;
+    font-weight: 600;
+    border: 2px solid $aksara-surface;
+    min-width: 20px;
+    height: 20px;
+    line-height: 16px;
+    border-radius: 99px;
+}
+
+// User profile page.
+.path-user .userprofile {
+    .profile_tree section {
+        background-color: $aksara-surface;
+        border: 1px solid $aksara-line;
+        border-radius: $aksara-radius-lg;
+        padding: 1rem 1.25rem;
+    }
+
+    .card-title,
+    h3.lead {
+        font-family: $aksara-font-serif;
+        font-weight: 600;
+    }
+}

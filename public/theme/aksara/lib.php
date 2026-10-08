@@ -33,11 +33,13 @@ const THEME_AKSARA_PARTIALS = [
     'navbar',
     'drawers',
     'header',
+    'banner',
     'components',
     'forms',
     'dashboard',
     'course',
     'tables',
+    'people',
     'login',
     'footer',
 ];

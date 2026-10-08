@@ -40,6 +40,10 @@ if ($ADMIN->fulltree) {
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
+    $setting = new admin_setting_configcheckbox('theme_aksara/showbanner',
+        get_string('showbanner', 'theme_aksara'), get_string('showbanner_desc', 'theme_aksara'), 1);
+    $page->add($setting);
+
     $settings->add($page);
 
     // Login tab.
