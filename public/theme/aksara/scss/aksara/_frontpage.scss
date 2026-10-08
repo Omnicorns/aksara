@@ -1,0 +1,600 @@
+// Site home: hero, counters, feature boxes, course grid; plus the visible site footer.
+
+// ---------------------------------------------------------------------------
+// Hero
+// ---------------------------------------------------------------------------
+.aksara-hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    margin: 0 0 1.5rem;
+    border-radius: 18px;
+    background-color: $primary;
+    color: #fff;
+
+    &.has-image {
+        grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    }
+
+    // Ruled lines, the login-page motif.
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background-image: repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 31px,
+            rgba(255, 255, 255, .05) 31px,
+            rgba(255, 255, 255, .05) 32px
+        );
+        pointer-events: none;
+    }
+
+    &:not(.has-image)::after {
+        content: "A";
+        position: absolute;
+        right: .1em;
+        bottom: -.3em;
+        z-index: -1;
+        font-family: $aksara-font-serif;
+        font-weight: 700;
+        font-size: 22rem;
+        line-height: 1;
+        color: rgba(255, 255, 255, .06);
+        pointer-events: none;
+    }
+
+    @include media-breakpoint-up(md) {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    @include media-breakpoint-down(lg) {
+        &.has-image {
+            grid-template-columns: minmax(0, 1fr);
+        }
+    }
+}
+
+.aksara-hero__body {
+    padding: 3.25rem 3rem 2.5rem;
+
+    @include media-breakpoint-down(md) {
+        padding: 2rem 1.5rem 1.75rem;
+    }
+}
+
+.aksara-hero__title {
+    margin: 0 0 1rem;
+    max-width: 16ch;
+    font-family: $aksara-font-serif;
+    font-weight: 600;
+    font-size: 3rem;
+    line-height: 1.06;
+    letter-spacing: -.025em;
+    color: #fff;
+
+    @include media-breakpoint-down(md) {
+        font-size: 2.125rem;
+    }
+}
+
+.aksara-hero__text {
+    max-width: 38rem;
+    margin: 0 0 1.75rem;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, .84);
+}
+
+.aksara-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+
+    .btn-lg {
+        padding: .75rem 1.4rem;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: $aksara-radius;
+    }
+
+    .btn-primary {
+        background-color: $aksara-accent;
+        border-color: $aksara-accent;
+        color: #fff;
+
+        &:hover,
+        &:focus {
+            background-color: darken($aksara-accent, 7%);
+            border-color: darken($aksara-accent, 7%);
+            color: #fff;
+        }
+    }
+
+    .btn-hero-ghost {
+        background-color: transparent;
+        border: 1px solid rgba(255, 255, 255, .45);
+        color: #fff;
+
+        &:hover,
+        &:focus {
+            background-color: rgba(255, 255, 255, .1);
+            border-color: #fff;
+            color: #fff;
+        }
+    }
+}
+
+.aksara-hero__stats {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0;
+    margin: 2.5rem 0 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, .16);
+}
+
+.aksara-hero__stat {
+    display: flex;
+    flex-direction: column-reverse;
+    padding-right: 1.5rem;
+    margin-right: 1.5rem;
+    border-right: 1px solid rgba(255, 255, 255, .16);
+
+    &:last-child {
+        border-right: 0;
+        margin-right: 0;
+        padding-right: 0;
+    }
+
+    dd {
+        margin: 0;
+        font-family: $aksara-font-serif;
+        font-weight: 600;
+        font-size: 2.25rem;
+        line-height: 1.1;
+        color: #fff;
+    }
+
+    dt {
+        font-size: .8125rem;
+        font-weight: 500;
+        letter-spacing: .02em;
+        color: lighten($aksara-accent, 28%);
+    }
+
+    @include media-breakpoint-down(md) {
+        padding-right: 1.25rem;
+        margin-right: 1.25rem;
+
+        dd {
+            font-size: 1.625rem;
+        }
+    }
+}
+
+.aksara-hero__media {
+    min-height: 320px;
+    background-color: darken($primary, 6%);
+    background-size: cover;
+    background-position: center;
+    // Soft edge where the photo meets the green panel.
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 18%);
+    mask-image: linear-gradient(to right, transparent 0, #000 18%);
+
+    @include media-breakpoint-down(lg) {
+        min-height: 220px;
+        order: -1;
+        -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+        mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+    }
+}
+
+// The standard header is only kept for its action buttons; its title is replaced by the hero.
+.aksara-hero__header-actions {
+    #page-header {
+        margin: 0;
+        padding: 0;
+    }
+
+    .page-context-header,
+    #page-navbar,
+    .mb-2:has(> span.h2) {
+        display: none !important; // stylelint-disable-line declaration-no-important
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Feature boxes
+// ---------------------------------------------------------------------------
+.aksara-features {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 0 0 2.5rem;
+
+    @include media-breakpoint-up(md) {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    @include media-breakpoint-down(xl) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include media-breakpoint-down(sm) {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.aksara-feature {
+    position: relative;
+    padding: 1.5rem 1.25rem 1.35rem;
+    background-color: $aksara-surface;
+    border: 1px solid $aksara-line;
+    border-radius: $aksara-radius-lg;
+    transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: 1.25rem;
+        top: -1px;
+        width: 2rem;
+        height: 3px;
+        border-radius: 0 0 2px 2px;
+        background-color: $aksara-accent;
+    }
+
+    &:hover {
+        border-color: $aksara-line-strong;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 24px rgba($aksara-ink, .07);
+    }
+}
+
+.aksara-feature__number {
+    display: block;
+    margin-bottom: .75rem;
+    font-family: $aksara-font-serif;
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 1;
+    color: $primary;
+}
+
+.aksara-feature__title {
+    margin: 0 0 .4rem;
+    font-family: $font-family-sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: $aksara-ink;
+}
+
+.aksara-feature__text {
+    margin: 0;
+    font-size: .875rem;
+    line-height: 1.55;
+    color: $aksara-muted;
+}
+
+// ---------------------------------------------------------------------------
+// Course list on the site home and category pages: card grid
+// ---------------------------------------------------------------------------
+#frontpage-available-course-list,
+#frontpage-course-list,
+.frontpage-course-list-all,
+.frontpage-course-list-enrolled {
+    > h2 {
+        margin: 0 0 1rem;
+        font-family: $aksara-font-serif;
+        font-size: 1.625rem;
+    }
+}
+
+.pagelayout-frontpage .courses.frontpage-course-list-all,
+.pagelayout-frontpage .courses.frontpage-course-list-enrolled,
+.course_category_tree .courses.category-browse {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+
+    @include media-breakpoint-down(lg) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include media-breakpoint-down(sm) {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    > .coursebox {
+        display: flex;
+        flex-direction: column;
+        margin: 0 !important; // stylelint-disable-line declaration-no-important
+        padding: 0 0 1rem !important; // stylelint-disable-line declaration-no-important
+        overflow: hidden;
+        background-color: $aksara-surface;
+        border: 1px solid $aksara-line !important; // stylelint-disable-line declaration-no-important
+        border-radius: $aksara-radius-lg !important; // stylelint-disable-line declaration-no-important
+        transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+
+        &:hover {
+            border-color: $aksara-line-strong !important; // stylelint-disable-line declaration-no-important
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba($aksara-ink, .08);
+        }
+
+        // Flatten the wrappers so the image can sit on top of the card.
+        > .content,
+        > .content > .d-flex {
+            display: contents !important; // stylelint-disable-line declaration-no-important
+        }
+
+        .courseimage {
+            order: 1;
+            margin: 0 !important; // stylelint-disable-line declaration-no-important
+            height: 9rem;
+            overflow: hidden;
+            border-bottom: 1px solid $aksara-line;
+
+            img {
+                width: 100%;
+                height: 100%;
+                max-width: none;
+                max-height: none;
+                object-fit: cover;
+            }
+        }
+
+        // Cards without an image get a coloured band with the motif.
+        &:not(:has(.courseimage))::before {
+            content: "";
+            order: 0;
+            display: block;
+            height: 9rem;
+            background-color: rgba($primary, .9);
+            background-image: repeating-linear-gradient(
+                to bottom,
+                transparent 0,
+                transparent 23px,
+                rgba(255, 255, 255, .07) 23px,
+                rgba(255, 255, 255, .07) 24px
+            );
+        }
+
+        > .info {
+            order: 2;
+            padding: 1rem 1.15rem .25rem;
+            float: none;
+            width: auto;
+
+            .coursename {
+                margin: 0;
+                font-family: $aksara-font-serif;
+                font-size: 1.125rem;
+                font-weight: 600;
+                line-height: 1.3;
+
+                a {
+                    color: $aksara-ink;
+
+                    &:hover {
+                        color: $primary;
+                        text-decoration: none;
+                    }
+                }
+            }
+
+            .moreinfo {
+                display: none;
+            }
+        }
+
+        .flex-grow-1 {
+            order: 3;
+            padding: 0 1.15rem;
+        }
+
+        .summary {
+            margin: .25rem 0 .5rem;
+            font-size: .875rem;
+            color: $aksara-muted;
+
+            .no-overflow {
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            // Line breaks inside summaries make the clamp uneven.
+            br {
+                content: " ";
+                display: none;
+            }
+        }
+
+        .teachers {
+            margin: 0;
+            padding: .6rem 0 0;
+            list-style: none;
+            border-top: 1px solid $gray-200;
+            font-size: .8125rem;
+            color: $aksara-muted;
+
+            li {
+                display: inline;
+
+                &:not(:last-child)::after {
+                    content: ", ";
+                }
+
+                // Only show the role label once.
+                &:not(:first-child) .fw-bold {
+                    display: none;
+                }
+            }
+
+            a {
+                color: $gray-700;
+            }
+        }
+
+        .coursecat {
+            order: 4;
+            padding: .5rem 1.15rem 0;
+            font-size: .6875rem;
+            font-weight: 600;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: $aksara-accent;
+
+            a {
+                color: inherit;
+            }
+        }
+    }
+}
+
+// "All courses" link under the list.
+.pagelayout-frontpage .paging-morelink,
+.pagelayout-frontpage .course-search-wrapper + .buttons,
+.pagelayout-frontpage #frontpage-available-course-list .paging {
+    margin-top: .5rem;
+
+    a {
+        font-weight: 600;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Visible site footer (templates/site_footer.mustache)
+// ---------------------------------------------------------------------------
+.aksara-footer {
+    margin-top: 3rem;
+
+    // #page has 3rem side padding from md up; stretch the footer to the edges.
+    @include media-breakpoint-up(md) {
+        margin-left: -3rem;
+        margin-right: -3rem;
+    }
+
+    background-color: $aksara-ink;
+    color: rgba(255, 255, 255, .72);
+    font-size: .875rem;
+
+    a {
+        color: rgba(255, 255, 255, .88);
+
+        &:hover {
+            color: #fff;
+        }
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li {
+            margin-bottom: .5rem;
+        }
+    }
+
+    .icon {
+        margin-right: .4rem;
+        color: lighten($aksara-accent, 20%);
+    }
+}
+
+.aksara-footer__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 2rem;
+
+    @include media-breakpoint-down(lg) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include media-breakpoint-down(sm) {
+        grid-template-columns: minmax(0, 1fr);
+        padding-top: 2.25rem;
+    }
+}
+
+.aksara-footer__name {
+    margin: 0 0 .6rem;
+    font-family: $aksara-font-serif;
+    font-weight: 600;
+    font-size: 1.375rem;
+    color: #fff;
+}
+
+.aksara-footer__about {
+    max-width: 30rem;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.aksara-footer__heading {
+    margin: 0 0 .9rem;
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: lighten($aksara-accent, 28%);
+}
+
+.aksara-footer__socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+
+    li {
+        margin: 0 !important; // stylelint-disable-line declaration-no-important
+    }
+
+    a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, .2);
+        transition: background-color .15s ease, border-color .15s ease;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, .1);
+            border-color: rgba(255, 255, 255, .45);
+        }
+    }
+
+    .icon {
+        margin: 0;
+        color: #fff;
+        font-size: 16px;
+    }
+}
+
+.aksara-footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: .5rem 1.5rem;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 1.1rem 1.5rem 1.4rem;
+    border-top: 1px solid rgba(255, 255, 255, .1);
+    font-size: .8125rem;
+    color: rgba(255, 255, 255, .55);
+}

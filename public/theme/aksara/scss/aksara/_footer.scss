@@ -1,17 +1,9 @@
 // Footer and the floating help button.
 
+// #page-footer only holds the floating "?" button; the visible footer is .aksara-footer
+// (see _frontpage.scss). Keep it transparent so it does not paint a strip under the page.
 #page-footer {
-    background-color: $aksara-ink;
-    color: rgba(255, 255, 255, .78);
-
-    a,
-    .footer-link {
-        color: rgba(255, 255, 255, .9);
-
-        &:hover {
-            color: #fff;
-        }
-    }
+    background-color: transparent !important; // stylelint-disable-line declaration-no-important
 }
 
 .btn-footer-popover {
@@ -29,9 +21,4 @@
     border-color: $aksara-line;
     border-radius: $aksara-radius-lg;
     box-shadow: $box-shadow-lg;
-}
-
-// Login page: keep only the floating button, no dark band.
-.aksara-loginpage #page-footer {
-    background: transparent;
 }

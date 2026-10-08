@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information for theme_aksara.
+ * Cache definitions for theme_aksara.
  *
  * @package    theme_aksara
  * @copyright  2026 Aksara
@@ -24,9 +24,12 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'theme_aksara';
-$plugin->version   = 2026100803;
-$plugin->release   = '1.3.0';
-$plugin->requires  = 2025092600;
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->dependencies = ['theme_boost' => 2025092600];
+$definitions = [
+    // Front page counters (users, courses, categories); refreshed every hour.
+    'stats' => [
+        'mode' => cache_store::MODE_APPLICATION,
+        'simplekeys' => true,
+        'simpledata' => true,
+        'ttl' => 3600,
+    ],
+];

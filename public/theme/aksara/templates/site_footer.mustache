@@ -1,0 +1,81 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_aksara/site_footer
+
+    Visible site footer: about text, contact details, links and social media.
+
+    Example context (json):
+    {
+        "sitename": "E-Learning Aksara",
+        "about": "Platform pembelajaran daring.",
+        "hascontacts": true,
+        "contacts": [{"icon": "fa-envelope", "text": "elearning@kampus.ac.id", "url": "mailto:elearning@kampus.ac.id"}],
+        "hassocials": true,
+        "socials": [{"url": "https://instagram.com/kampus", "icon": "fa-instagram", "label": "Instagram"}],
+        "links": [{"url": "#", "label": "Semua kursus"}],
+        "year": "2026"
+    }
+}}
+<div class="aksara-footer d-print-none" role="contentinfo">
+    <div class="aksara-footer__inner">
+        <div class="aksara-footer__brand">
+            <p class="aksara-footer__name">{{sitename}}</p>
+            {{#about}}<p class="aksara-footer__about">{{{about}}}</p>{{/about}}
+        </div>
+
+        <nav class="aksara-footer__col" aria-label="{{#str}} footerlinks, theme_aksara {{/str}}">
+            <p class="aksara-footer__heading">{{#str}} footerlinks, theme_aksara {{/str}}</p>
+            <ul>
+                {{#links}}<li><a href="{{url}}">{{label}}</a></li>{{/links}}
+            </ul>
+        </nav>
+
+        {{#hascontacts}}
+        <div class="aksara-footer__col">
+            <p class="aksara-footer__heading">{{#str}} footercontact, theme_aksara {{/str}}</p>
+            <ul>
+                {{#contacts}}
+                <li>
+                    <i class="icon fa {{icon}} fa-fw" aria-hidden="true"></i>
+                    {{#url}}<a href="{{url}}">{{text}}</a>{{/url}}{{^url}}<span>{{text}}</span>{{/url}}
+                </li>
+                {{/contacts}}
+            </ul>
+        </div>
+        {{/hascontacts}}
+
+        {{#hassocials}}
+        <div class="aksara-footer__col">
+            <p class="aksara-footer__heading">{{#str}} footerfollow, theme_aksara {{/str}}</p>
+            <ul class="aksara-footer__socials">
+                {{#socials}}
+                <li>
+                    <a href="{{url}}" target="_blank" rel="noopener" aria-label="{{label}}" title="{{label}}">
+                        <i class="icon fa {{icon}} fa-fw" aria-hidden="true"></i>
+                    </a>
+                </li>
+                {{/socials}}
+            </ul>
+        </div>
+        {{/hassocials}}
+    </div>
+    <div class="aksara-footer__bottom">
+        <span>&copy; {{year}} {{sitename}}</span>
+        <span>{{#str}} poweredbymoodle, core {{/str}}</span>
+    </div>
+</div>

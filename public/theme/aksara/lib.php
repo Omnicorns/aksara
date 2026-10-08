@@ -40,6 +40,7 @@ const THEME_AKSARA_PARTIALS = [
     'course',
     'tables',
     'people',
+    'frontpage',
     'login',
     'footer',
 ];
@@ -139,7 +140,7 @@ function theme_aksara_get_precompiled_css() {
  * @return bool
  */
 function theme_aksara_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
-    if ($context->contextlevel == CONTEXT_SYSTEM && $filearea === 'loginimage') {
+    if ($context->contextlevel == CONTEXT_SYSTEM && in_array($filearea, ['loginimage', 'heroimage'])) {
         $theme = theme_config::load('aksara');
         if (!array_key_exists('cacheability', $options)) {
             $options['cacheability'] = 'public';

@@ -43,6 +43,13 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $header = parent::full_header();
 
         $layout = $this->page->pagelayout;
+        if ($layout === 'frontpage' && get_config('theme_aksara', 'frontpagehero') !== '0') {
+            try {
+                return $this->frontpage_hero($header);
+            } catch (\Throwable $e) {
+                debugging('theme_aksara hero: ' . $e->getMessage(), DEBUG_DEVELOPER);
+            }
+        }
         if (!in_array($layout, self::BANNER_LAYOUTS) || get_config('theme_aksara', 'showbanner') === '0') {
             return $header;
         }
@@ -144,5 +151,150 @@ class core_renderer extends \theme_boost\output\core_renderer {
             ];
         }
         return $context;
+    }
+
+    /**
+     * Landing section for the site home: hero, statistics and feature boxes.
+     *
+     * @param string $header Standard page header, kept for its header actions.
+     * @return string
+     */
+    private function frontpage_hero(string $header): string {
+        global $CFG, $SITE, $DB;
+
+        $config = get_config('theme_aksara');
+        $sitecontext = \context_course::instance(SITEID);
+
+        $title = trim((string) ($config->herotitle ?? ''));
+        if ($title === '') {
+            $title = format_string($SITE->fullname, true, ['context' => $sitecontext]);
+        } else {
+            $title = format_string($title, true, ['context' => $sitecontext]);
+        }
+        $text = trim((string) ($config->herotext ?? ''));
+        if ($text === '') {
+            $text = trim((string) ($config->logintagline ?? ''));
+        }
+
+        $buttons = [];
+        if (!isloggedin() || isguestuser()) {
+            $buttons[] = ['url' => get_login_url(), 'label' => get_string('login'), 'primary' => true];
+        } else {
+            $buttons[] = ['url' => (new \moodle_url('/my/courses.php'))->out(false),
+                'label' => get_string('mycourses'), 'primary' => true];
+        }
+        $buttons[] = ['url' => (new \moodle_url('/course/index.php'))->out(false),
+            'label' => get_string('herobrowse', 'theme_aksara'), 'primary' => false];
+
+        $stats = [];
+        if (($config->herostats ?? '1') !== '0') {
+            $cache = \cache::make('theme_aksara', 'stats');
+            if (!$counts = $cache->get('frontpage')) {
+                $counts = [
+                    'users' => $DB->count_records_select('user',
+                        'deleted = 0 AND suspended = 0 AND confirmed = 1 AND id <> :guest', ['guest' => $CFG->siteguest]),
+                    'courses' => $DB->count_records_select('course', 'id <> :site AND visible = 1', ['site' => SITEID]),
+                    'categories' => $DB->count_records('course_categories', ['visible' => 1]),
+                ];
+                $cache->set('frontpage', $counts);
+            }
+            foreach (['users', 'courses', 'categories'] as $key) {
+                $stats[] = [
+                    'value' => number_format($counts[$key], 0, ',', '.'),
+                    'label' => get_string('herostat_' . $key, 'theme_aksara'),
+                ];
+            }
+        }
+
+        $features = [];
+        for ($i = 1; $i <= 4; $i++) {
+            $ftitle = trim((string) ($config->{'feature' . $i . 'title'} ?? ''));
+            $ftext = trim((string) ($config->{'feature' . $i . 'text'} ?? ''));
+            if ($ftitle === '' && $ftext === '') {
+                continue;
+            }
+            $features[] = [
+                'number' => sprintf('%02d', count($features) + 1),
+                'title' => format_string($ftitle, true, ['context' => $sitecontext]),
+                'text' => format_string($ftext, true, ['context' => $sitecontext]),
+            ];
+        }
+
+        $theme = \theme_config::load('aksara');
+        $image = $theme->setting_file_url('heroimage', 'heroimage');
+
+        return $this->render_from_template('theme_aksara/frontpage_hero', [
+            'header' => $header,
+            'title' => $title,
+            'text' => $text,
+            'buttons' => $buttons,
+            'hasstats' => !empty($stats),
+            'stats' => $stats,
+            'hasfeatures' => !empty($features),
+            'features' => $features,
+            'image' => $image ? (string) $image : '',
+        ]);
+    }
+
+    /**
+     * Site footer shown at the bottom of every page (except login and pop-ups).
+     *
+     * @return string
+     */
+    public function aksara_footer(): string {
+        global $SITE;
+
+        $layout = $this->page->pagelayout;
+        if (in_array($layout, ['login', 'popup', 'embedded', 'frametop', 'print', 'redirect', 'maintenance', 'secure'])) {
+            return '';
+        }
+        if (get_config('theme_aksara', 'showfooter') === '0') {
+            return '';
+        }
+
+        $config = get_config('theme_aksara');
+        $sitecontext = \context_course::instance(SITEID);
+
+        $contacts = [];
+        foreach (['contactemail' => 'fa-envelope', 'contactphone' => 'fa-phone', 'contactaddress' => 'fa-location-dot'] as $key => $icon) {
+            $value = trim((string) ($config->$key ?? ''));
+            if ($value === '') {
+                continue;
+            }
+            $item = ['icon' => $icon, 'text' => $value, 'url' => ''];
+            if ($key === 'contactemail' && validate_email($value)) {
+                $item['url'] = 'mailto:' . $value;
+            } else if ($key === 'contactphone') {
+                $item['url'] = 'tel:' . preg_replace('/[^0-9+]/', '', $value);
+            }
+            $contacts[] = $item;
+        }
+
+        $socials = [];
+        $networks = ['website' => 'fa-globe', 'instagram' => 'fa-instagram', 'youtube' => 'fa-youtube',
+            'facebook' => 'fa-facebook', 'whatsapp' => 'fa-whatsapp'];
+        foreach ($networks as $key => $icon) {
+            $url = clean_param(trim((string) ($config->{'social' . $key} ?? '')), PARAM_URL);
+            if ($url === '') {
+                continue;
+            }
+            $socials[] = ['url' => $url, 'icon' => $icon, 'label' => get_string('social_' . $key, 'theme_aksara')];
+        }
+
+        $about = trim((string) ($config->footerabout ?? ''));
+
+        return $this->render_from_template('theme_aksara/site_footer', [
+            'sitename' => format_string($SITE->fullname, true, ['context' => $sitecontext]),
+            'about' => $about !== '' ? nl2br(s($about)) : '',
+            'hascontacts' => !empty($contacts),
+            'contacts' => $contacts,
+            'hassocials' => !empty($socials),
+            'socials' => $socials,
+            'year' => userdate(time(), '%Y'),
+            'links' => [
+                ['url' => (new \moodle_url('/course/index.php'))->out(false), 'label' => get_string('fulllistofcourses')],
+                ['url' => (new \moodle_url('/calendar/view.php'))->out(false), 'label' => get_string('calendar', 'calendar')],
+            ],
+        ]);
     }
 }

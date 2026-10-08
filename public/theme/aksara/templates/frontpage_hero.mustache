@@ -1,0 +1,74 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_aksara/frontpage_hero
+
+    Site home landing: hero with call to action, counters and feature boxes.
+
+    Example context (json):
+    {
+        "header": "",
+        "title": "E-Learning Aksara",
+        "text": "Belajar, berdiskusi, dan mengumpulkan tugas dalam satu tempat.",
+        "buttons": [{"url": "#", "label": "Masuk", "primary": true}, {"url": "#", "label": "Lihat katalog", "primary": false}],
+        "hasstats": true,
+        "stats": [{"value": "2.792", "label": "pengguna aktif"}],
+        "hasfeatures": true,
+        "features": [{"number": "01", "title": "Materi terstruktur", "text": "Modul, video, dan bacaan per pertemuan."}],
+        "image": ""
+    }
+}}
+<section class="aksara-hero{{#image}} has-image{{/image}}" aria-labelledby="aksara-hero-title">
+    <div class="aksara-hero__body">
+        <h1 id="aksara-hero-title" class="aksara-hero__title">{{title}}</h1>
+        {{#text}}<p class="aksara-hero__text">{{text}}</p>{{/text}}
+        <div class="aksara-hero__actions">
+            {{#buttons}}
+            <a href="{{url}}" class="btn {{#primary}}btn-primary{{/primary}}{{^primary}}btn-hero-ghost{{/primary}} btn-lg">{{label}}</a>
+            {{/buttons}}
+        </div>
+        {{#hasstats}}
+        <dl class="aksara-hero__stats">
+            {{#stats}}
+            <div class="aksara-hero__stat">
+                <dt>{{label}}</dt>
+                <dd>{{value}}</dd>
+            </div>
+            {{/stats}}
+        </dl>
+        {{/hasstats}}
+    </div>
+    {{#image}}
+    <div class="aksara-hero__media" style="background-image: url('{{image}}');" role="presentation"></div>
+    {{/image}}
+</section>
+
+{{#hasfeatures}}
+<section class="aksara-features" aria-label="{{#str}} featuresheading, theme_aksara {{/str}}">
+    {{#features}}
+    <article class="aksara-feature">
+        <span class="aksara-feature__number" aria-hidden="true">{{number}}</span>
+        <h2 class="aksara-feature__title">{{title}}</h2>
+        <p class="aksara-feature__text">{{text}}</p>
+    </article>
+    {{/features}}
+</section>
+{{/hasfeatures}}
+
+<div class="aksara-hero__header-actions">
+    {{{header}}}
+</div>
