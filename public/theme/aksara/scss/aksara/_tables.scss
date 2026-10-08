@@ -32,13 +32,46 @@
 }
 
 // Wrap wide tables in a quiet frame.
+// No overflow:hidden here: it would cut off dropdowns opened inside the last rows
+// (role editing, action menus). The corner cells are rounded instead.
 #region-main .generaltable:not(.boxaligncenter),
 .reportbuilder-table {
     border: 1px solid $aksara-line;
     border-radius: $aksara-radius;
     border-collapse: separate;
     border-spacing: 0;
-    overflow: hidden;
+
+    > thead > tr:first-child > :first-child,
+    > tr:first-child > :first-child {
+        border-top-left-radius: $aksara-radius;
+    }
+
+    > thead > tr:first-child > :last-child,
+    > tr:first-child > :last-child {
+        border-top-right-radius: $aksara-radius;
+    }
+
+    > tbody:last-child > tr:last-child > :first-child {
+        border-bottom-left-radius: $aksara-radius;
+    }
+
+    > tbody:last-child > tr:last-child > :last-child {
+        border-bottom-right-radius: $aksara-radius;
+    }
+
+    > tbody:last-child > tr:last-child > * {
+        border-bottom: 0;
+    }
+}
+
+// Dropdowns opened from inside tables must sit above the following rows and the footer.
+.generaltable,
+.table,
+.inplaceeditable {
+    .form-autocomplete-suggestions,
+    .dropdown-menu {
+        z-index: 1050;
+    }
 }
 
 // Initials bar on participant lists.
@@ -56,4 +89,12 @@
     tr .cell {
         border-color: $aksara-line;
     }
+}
+
+// Moodle wraps tables in .table-responsive (overflow: auto). While a role or other
+// inline field is being edited, let its dropdown spill out instead of hiding it inside
+// the table's own scroll area.
+.table-responsive:has(.inplaceeditingon),
+.table-responsive:has(.form-autocomplete-suggestions:not([aria-hidden="true"])) {
+    overflow: visible;
 }
