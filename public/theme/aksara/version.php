@@ -25,8 +25,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'theme_aksara';
-$plugin->version   = 2026100801;
-$plugin->release   = '1.1.0';
+$plugin->version   = 2026100802;
+$plugin->release   = '1.2.0';
 $plugin->requires  = 2025092600;
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->dependencies = ['theme_boost' => 2025092600];

@@ -44,6 +44,10 @@ if ($ADMIN->fulltree) {
         get_string('showbanner', 'theme_aksara'), get_string('showbanner_desc', 'theme_aksara'), 1);
     $page->add($setting);
 
+    $setting = new admin_setting_configtext('theme_aksara/quizreviewlabel',
+        get_string('quizreviewlabel', 'theme_aksara'), get_string('quizreviewlabel_desc', 'theme_aksara'), '', PARAM_TEXT);
+    $page->add($setting);
+
     $settings->add($page);
 
     // Login tab.
